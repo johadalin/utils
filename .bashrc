@@ -144,6 +144,16 @@ function change_colors
 
     COLCOUNT=$(( $COLCOUNT + 1 ))
     PS1="${FINAL}\[\e[0m\]"
-    PS1+=' \[\e[0;36m\]\w\[\e[m\] $(__git_ps1 "[\[\e[0;32m\]%s\[\e[0m\]]")\[\e[0;31m\]\$\[\e[0m\] '
+    # Add working directory
+    PS1+=' \[\e[0;36m\]\w\[\e[m\]'
+    # Add virtual env dir if we're in one
+    if [ -n "$VIRTUAL_ENV" ]
+    then
+      PS1+='\[\e[38;5;196m\](${VIRTUAL_ENV##*/})\[\e[m\]'
+    fi
+    # Add git status
+    PS1+=' $(__git_ps1 "[\[\e[0;32m\]%s\[\e[0m\]]")'
+    # Add trailing $ and space
+    PS1+='\[\e[0;31m\]\$\[\e[0m\] '
 }
 PROMPT_COMMAND=change_colors
