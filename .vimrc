@@ -31,8 +31,8 @@ call vundle#end()            " required
 
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 let g:rainbow_conf = {
-  \ 'guifgs': ['purple1', 'magenta1', 'DodgerBlue1', 'cyan1', 'green1', 'OliveDrab1', 'yellow1', 'DarkOragnge', 'OrangeRed', 'firebrick1'],
-  \ 'ctermfgs': [141, 201, 33, 51, 46, 155, 226, 208, 202, 196],
+  \ 'guifgs': ['firebrick1','OrangeRed','DarkOrange','yellow1','OliveDrab1','green1','cyan1','DodgerBlue1','magenta1','purple1'],
+  \ 'ctermfgs': [196, 202, 208, 226, 155, 46, 51, 33, 201, 141],
   \ 'operators': '_,_',
   \ 'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
   \ 'separately': {
