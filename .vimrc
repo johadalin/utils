@@ -1,44 +1,4 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Basic usability
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Make things usably visible
-set bg=dark
-
-" syntax highlighting
-syntax on
-
-" display cursor position on ctrl-G
-set ruler
-
-" auto-indent to same point as previous line
-" set autoindent
-
-" Tab alterations. tab inserts 2 spaces
-set tabstop=2
-set shiftwidth=2
-set expandtab
-
-" Enable mouse functionality
-set mouse=a
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" More usability
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Filetype specific tab behaviour
-au FileType make setlocal noexpandtab
-au FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
-
-" Remember location in file
-" If this doens't work, check the file permissions on the .viminfo file
-set viminfo='10,\"100,:20,%,n~/.viminfo
-function! ResCur()
-  if line("'\"") <= line("$")
-    normal! g`"
-    return 1
-  endif
-endfunction
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle setup
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible              " be iMproved, required
@@ -97,6 +57,46 @@ let g:rainbow_conf = {
   \   'css': 0,
   \ }
   \}
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Basic usability
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Make things usably visible
+set bg=dark
+
+" syntax highlighting
+syntax on
+
+" display cursor position on ctrl-G
+set ruler
+
+" auto-indent to same point as previous line
+" set autoindent
+
+" Tab alterations. tab inserts 2 spaces
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+" Enable mouse functionality
+set mouse=a
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" More usability
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Filetype specific tab behaviour
+au FileType make setlocal noexpandtab
+au FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
+
+" Remember location in file
+" If this doens't work, check the file permissions on the .viminfo file
+set viminfo='10,\"100,:20,%,n~/.viminfo
+function! ResCur()
+  if line("'\"") <= line("$")
+    normal! g`"
+    return 1
+  endif
+endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fancypants column highlighting
