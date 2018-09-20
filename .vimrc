@@ -1,4 +1,46 @@
-" Vundle setup start
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Basic usability
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Make things usably visible
+set bg=dark
+
+" syntax highlighting
+syntax on
+
+" display cursor position on ctrl-G
+set ruler
+
+" auto-indent to same point as previous line
+" set autoindent
+
+" Tab alterations. tab inserts 2 spaces
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+" Enable mouse functionality
+set mouse=a
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" More usability
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Filetype specific tab behaviour
+au FileType make setlocal noexpandtab
+au FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
+
+" Remember location in file
+" If this doens't work, check the file permissions on the .viminfo file
+set viminfo='10,\"100,:20,%,n~/.viminfo
+function! ResCur()
+  if line("'\"") <= line("$")
+    normal! g`"
+    return 1
+  endif
+endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vundle setup
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible              " be iMproved, required
 filetype off                  " required
 " set the runtime path to include Vundle and initialize
@@ -7,10 +49,13 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 " Vundle Plugins
-"Plugin 'vim-scripts/Conque-Shell'
+" Conque-Shell allows opening any program in a vim buffer. Pretty gross, but fun
 Plugin 'lrvick/Conque-Shell'
+" Gives rainbow bracket highlighting. Becuase what are spare CPU cycles for
 Plugin 'luochen1990/rainbow'
+" Rust syntax highlighing
 "Plugin 'rust-lang/rust.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 "filetype plugin indent on    " required
@@ -26,9 +71,9 @@ call vundle#end()            " required
 " see :h vundle for more details or wiki for FAQ
 " Vundle setup end
 
-"\ 'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-"\ 'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Configuration for the Rainbow plugin
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 let g:rainbow_conf = {
   \ 'guifgs': ['firebrick1','OrangeRed','DarkOrange','yellow1','OliveDrab1','green1','cyan1','DodgerBlue1','magenta1','purple1'],
@@ -53,35 +98,9 @@ let g:rainbow_conf = {
   \ }
   \}
 
-
-set bg=dark
-"syntax highlighting
-syntax on
-"display cursor position on ctrl-G
-set ruler
-"auto-indent to same point as previous line
-"set autoindent
-
-"Tab alterations. tab inserts 2 spaces
-set tabstop=2
-set shiftwidth=2
-set expandtab
-
-set mouse=a
-
-
-au FileType make setlocal noexpandtab
-au FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
-
-" Remember location in file
-set viminfo='10,\"100,:20,%,n~/.viminfo
-function! ResCur()
-  if line("'\"") <= line("$")
-    normal! g`"
-    return 1
-  endif
-endfunction
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Fancypants column highlighting
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 highlight ColorColumn ctermbg=235
 let &colorcolumn="80,100"
 highlight LongLine ctermbg=88
