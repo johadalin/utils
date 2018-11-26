@@ -1,5 +1,15 @@
+" vim: set foldmethod=marker:
+"
+" This file is folded by default. Use:
+" -  zR to expand all folds.
+" -  zM to close all folds.
+" -  zc to close a single fold
+" -  zo to open a single fold
+" -  za to toggle a fold (open a closed one or close an open one. This is
+"    genrally more useful than zc or zo).
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vundle setup
+" Plugins / Vundle setup {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -9,12 +19,56 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 " Vundle Plugins
+
 " Conque-Shell allows opening any program in a vim buffer. Pretty gross, but fun
 Plugin 'lrvick/Conque-Shell'
 " Gives rainbow bracket highlighting. Becuase what are spare CPU cycles for
 Plugin 'luochen1990/rainbow'
-" Rust syntax highlighing
+
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'git@gitlab.datcon.co.uk:ajh/clearwater.vim.git'
+
+" To install the YouCompleteMe plugin, you need to build it locally after it's been pulled down.
+" cd ~/.vim/bundle/YouCompleteMe
+" python3 install.py --clang-completer
+if v:version >= 704  " YouCompleteMe requires a recent version of Vim.
+  Plugin 'Valloric/YouCompleteMe'
+endif
+
+" AJH PLUGINS {{{
+"Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'SirVer/ultisnips'
+"Plugin 'tpope/vim-fugitive'
+"Plugin 'tpope/vim-endwise'
+"Plugin 'tpope/vim-abolish'
+"Plugin 'vim-indent-object'
+"Plugin 'kana/vim-textobj-user'
+"Plugin 'glts/vim-textobj-comment'
+"Plugin 'AlexHockey/current-function.vim'
+"
+"" Language-specific plugins.
+"Plugin 'vim-ruby/vim-ruby'
+"Plugin 'jnwhiteh/vim-golang'
 "Plugin 'rust-lang/rust.vim'
+"Plugin 'greyblake/vim-preview'
+"Plugin 'plasticboy/vim-markdown'
+"Plugin 'vim-scripts/DoxygenToolkit.vim'
+"Plugin 'vim-scripts/supp.vim'
+"Plugin 'mustache/vim-mustache-handlebars'
+"Plugin 'cespare/vim-toml'
+"Plugin 'Glench/Vim-Jinja2-Syntax'
+"Plugin 'ekalinin/Dockerfile.vim'
+"
+"" Colorschemes
+"Plugin 'joshdick/onedark.vim'
+"Plugin 'drewtempelmeyer/palenight.vim'
+"Plugin 'dracula/vim'
+"Plugin 'haishanh/night-owl.vim'
+"
+" }}}
+
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -30,9 +84,35 @@ call vundle#end()            " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Vundle setup end
+" }}}
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Configuration for the Rainbow plugin
+" Find / Replace {{{
+
+" Highlight search matches.
+set hlsearch
+hi Search ctermbg=DarkGrey
+"hi Search ctermfg=DarkRed
+
+" Ignore case except when the search term contains uppercase (that is what
+" ignorecase and smartcase do).
+set ignorecase
+set smartcase
+
+" When searching through a file, center the match in the window. If you don't
+" do this Vim can put the match at the very bottom/top of the window, which
+" means you can't seen the code surrounding the match very well.
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap <kMultiply> *zz
+nnoremap # #zz
+
+" Make Ctrl-C escape *and* clear the current highlighting.
+nmap <C-C> <esc>:noh<cr>
+
+" }}}
+
+" Configuration for the Rainbow plugin {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 let g:rainbow_conf = {
@@ -57,7 +137,9 @@ let g:rainbow_conf = {
   \   'css': 0,
   \ }
   \}
+" }}}
 
+" Usability {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Basic usability
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -98,8 +180,31 @@ function! ResCur()
   endif
 endfunction
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Fancypants column highlighting
+" Make the unnamed register the same as the clipboard register.  The unnamed
+" register is where text is stored when you yank it.  By making it the same
+" as the clipboard, yanking and pasting in Vim affects the system clipboard.
+" http://vim.wikia.com/wiki/VimTip21
+set clipboard=unnamedplus
+
+" Make tab completion work more like how it does on Linux.
+set completeopt=longest,menuone
+set wildmode=longest,list,full
+
+" Ignore binary files in tab completion, Ctrl-P, etc.
+set wildignore+=*.o,*.so,*.git/*,*.svn/*
+
+" Show tabs and wrapped lines.
+set list
+set listchars=tab:▸\ ,
+let &showbreak='▸ '
+
+" Strip trailing whitespace on save - for all file types.
+" See http://vim.wikia.com/wiki/Remove_unwanted_spaces
+autocmd BufWritePre * :%s/\s\+$//e
+
+" }}}
+
+" Fancypants column highlighting {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 highlight ColorColumn ctermbg=235
 let &colorcolumn="80,100"
@@ -107,3 +212,64 @@ highlight LongLine ctermbg=88
 call matchadd('LongLine', '\%<101v.\%>81v', 100)
 highlight LongerLine ctermbg=89
 call matchadd('LongerLine', '\%>100v', 100)
+" }}}
+
+" Status Line {{{
+" Set the status line to be visible at all times.
+set laststatus=2
+
+" Use a nice color scheme for the status line. Dracula is more visualy intense
+" than onedark (the scheme used for the rest of the editor) so this makes the
+" statsu line stand out a bit more.
+"let g:airline_theme = 'dracula'
+
+" Make airline use the powerline fonts, so we get a pretty looking line with
+" chevrons, git branch symbols, etc.
+let g:airline_powerline_fonts = 1
+
+"" By default the central section of the statusline contains the current file. As
+"" that is displayed at the top of the window, we can use it for something
+"" different. I find that displaying the current function is the most useful.
+"let g:airline_section_c = '%{GetFunctionUnderCursor()}'
+"" }}}
+
+" Grep Settings {{{
+
+" Make grep ignore common false positives - binary files (-I) and tags.
+set grepprg=grep\ -nI\ --exclude\ 'tags'\ $*\ /dev/null\ --exclude-dir=.svn\ --exclude\ \*.js\ --exclude\ \*.memcheck
+
+" Grep for word under the cursor.
+nnoremap <Leader>gw :grep -rw <cword> .<CR>
+" }}}
+
+" Tagging {{{
+
+" Search for tag files in the current directory, and all parent directories.
+set tags=tags;/
+
+" Navigate through several possible tag matches.
+nnoremap <F7> :tprev<cr>
+nnoremap <F8> :tnext<cr>
+
+" Rebuild tags. This function searches up from the current directory until it
+" finds a directory with a tags file. It then rebuilds this tags file by
+" calling `ctags .`
+function! RebuildTags(cwd)
+python << EOF
+import vim, os
+cwd = vim.eval("a:cwd")
+elems = cwd.split(os.sep)
+elems = list(reversed(elems))
+
+for levels_up in range(len(elems)):
+  target = os.sep.join(reversed(["tags"] + elems[levels_up : ]))
+  if os.path.isfile(target):
+    print "Rebuilding tagfile '%s' ..." % target
+    os.system("( cd $( dirname %s ) && ctags . )" % target)
+    print "Done"
+EOF
+endfunction
+command! Tagme call RebuildTags(getcwd())
+" }}}
+
+
