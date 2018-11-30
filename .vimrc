@@ -36,6 +36,29 @@ if v:version >= 704  " YouCompleteMe requires a recent version of Vim.
   Plugin 'Valloric/YouCompleteMe'
 endif
 
+" YouCompleteMe settings {{{
+
+" Don't clutter the UI with compilation warnings/errors.
+let g:ycm_enable_diagnostic_signs=0
+let g:ycm_enable_diagnostic_highlighting=0
+let g:ycm_echo_current_diagnostic=0
+
+" Don't complete in comments
+let g:ycm_complete_in_comments=0
+
+" The YcmCompleter has a bunch of useful functions. Map some of the more commen
+" ones to keybindings.
+
+" Type-aware goto declaration. This is useful when wanting to find the
+" declaration of a function with a short, common name, that may be used in many
+" different classes or projects.
+nmap <leader>yg :YcmCompleter GoTo<cr>
+
+" Print the type of the variable under the cursor.
+nmap <leader>yt :YcmCompleter GetType<cr>
+" }}}
+
+
 " AJH PLUGINS {{{
 "Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'SirVer/ultisnips'
