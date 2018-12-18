@@ -116,17 +116,17 @@ hi Search ctermbg=DarkGrey
 
 " Ignore case except when the search term contains uppercase (that is what
 " ignorecase and smartcase do).
-set ignorecase
-set smartcase
+" set ignorecase
+" set smartcase
 
 " When searching through a file, center the match in the window. If you don't
 " do this Vim can put the match at the very bottom/top of the window, which
 " means you can't seen the code surrounding the match very well.
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap * *zz
-nnoremap <kMultiply> *zz
-nnoremap # #zz
+" nnoremap n nzz
+" nnoremap N Nzz
+" nnoremap * *zz
+" nnoremap <kMultiply> *zz
+" nnoremap # #zz
 
 " Make Ctrl-C escape *and* clear the current highlighting.
 nmap <C-C> <esc>:noh<cr>
