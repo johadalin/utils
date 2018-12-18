@@ -20,8 +20,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 " Vundle Plugins
 
-" Conque-Shell allows opening any program in a vim buffer. Pretty gross, but fun
-Plugin 'lrvick/Conque-Shell'
 " Gives rainbow bracket highlighting. Becuase what are spare CPU cycles for
 Plugin 'luochen1990/rainbow'
 
