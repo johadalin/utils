@@ -11,6 +11,10 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins / Vundle setup {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" First time setup - you will need to clone vundle, running:
+"   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" To install plugins, use Vim command `:PluginInstall`
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 " set the runtime path to include Vundle and initialize
@@ -28,8 +32,9 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'git@gitlab.datcon.co.uk:ajh/clearwater.vim.git'
 
 " To install the YouCompleteMe plugin, you need to build it locally after it's been pulled down.
-" cd ~/.vim/bundle/YouCompleteMe
-" python3 install.py --clang-completer
+" First, run the Vundle :PluginInstall to let it clone the code, then run:
+"   cd ~/.vim/bundle/YouCompleteMe
+"   python3 install.py --clang-completer
 if v:version >= 704  " YouCompleteMe requires a recent version of Vim.
   Plugin 'Valloric/YouCompleteMe'
 endif
@@ -58,6 +63,9 @@ nmap <leader>yt :YcmCompleter GetType<cr>
 
 
 " AJH PLUGINS {{{
+
+" Some configuration taken from https://github.com/AlexHockey/dotfiles/tree/master/dotfiles
+" Not tested or used yet, but intent to at some point
 "Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'SirVer/ultisnips'
 "Plugin 'tpope/vim-fugitive'
@@ -88,7 +96,6 @@ nmap <leader>yt :YcmCompleter GetType<cr>
 "Plugin 'haishanh/night-owl.vim'
 "
 " }}}
-
 
 
 " All of your Plugins must be added before the following line
