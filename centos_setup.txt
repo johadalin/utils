@@ -1,0 +1,13 @@
+# Make vim 8.1, so that YouCompleteMe works
+sudo yum install cscope ncurses ncurses-devel ncurses-libs ncurses-base python-libs ruby-devel python36 python36-pip python36-devel perl perl-devel.x86_64 perl-ExtUtils-CBuilder.noarch perl-ExtUtils-Embed.noarch perl-ExtUtils-XSpp.noarch perl-ExtUtils-XSBuilder.noarch ctags lua lua-devel.x86_64 tcl-devel ctags git luajit
+sudo ln -s /usr/bin/xsubpp /usr/share/perl5/ExtUtils/xsubpp
+
+sudo yum remove vim gvim vim-common.x86_64 vim-minimal.x86_64 vim-filesystem.x86_64
+
+git clone git@github.com:vim/vim.git
+cd vim
+
+./configure --with-features=huge --enable-multibyte --enable-rubyinterp=yes --enable-pythoninterp=yes --with-python-config-dir=/lib64/python2.7/config --enable-python3interp vi_cv_path_python3=/usr/bin/python3.6 --with-python-config-dir=/usr/lib64/python3.6/config-3.6m-x86_64-linux-gnu/ --enable-perlinterp --enable-luainterp --enable-gui=gtk2 --enable-cscope --prefix=/usr/local
+
+make VIMRUNTIMEDIR=/usr/local/share/vim/vim81
+sudo make install
