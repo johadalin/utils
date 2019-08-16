@@ -12,6 +12,9 @@ cd vim
 make VIMRUNTIMEDIR=/usr/local/share/vim/vim81
 sudo make install
 
+# Link this vim to /usr/bin, so root has vim
+sudo ln -s /usr/local/bin/vim /usr/bin/vim
+
 cat <<EOF >> .config/xfce4/terminal/accels.scm
 (gtk_accel_path "<Actions>/terminal-window/next-tab" "<Primary>n")
 (gtk_accel_path "<Actions>/terminal-window/prev-tab" "<Primary>b")
@@ -24,3 +27,30 @@ EOF
 #      <property name="&lt;Super&gt;Up" type="string" value="tile_up_key"/>
 #      <property name="&lt;Super&gt;Left" type="string" value="tile_left_key"/>
 
+
+# Moved the team and powerline bashrcs out, stuck mine in.
+# Customised fonts and all that. Pulled the ssh function back across from the team rc
+# Setup autologin, and no chrome keyring
+  # in /etc/lightdm/lightdm.conf, set:
+```
+pam-service=lightdm
+pam-autologin-service=lightdm-autologin
+autologin-user=developer
+autologin-user-timeout=0
+autologin-session=xfce
+
+```
+# Run:
+sudo groupadd -r autologin
+sudo gpasswd -a developer autologin
+
+# Chrome changes so it doens't prompt for passwords all the time. This is insecure, but i don't store sensitive things in dev vm password store:
+cp /usr/share/applications/google-chrome.desktop ~/.local/share/applications
+vim ~/.local/share/applications/google-chrome.desktop
+# Add --password-store=basic to all lines starting `Exec`
+e.g.
+11:58:49-devin ~ $ diff /usr/share/applications/google-chrome.desktop ~/.local/share/applications/google-chrome.desktop
+108c108
+< Exec=/usr/bin/google-chrome-stable %U --disable-async-dns
+---
+> Exec=/usr/bin/google-chrome-stable --password-store=basic %U --disable-async-dns
