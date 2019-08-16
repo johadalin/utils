@@ -188,6 +188,9 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
+" Set backspace/delete to wrap over lines
+set backspace=indent,eol,start
+
 " Enable mouse functionality
 set mouse=a
 
