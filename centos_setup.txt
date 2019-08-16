@@ -11,3 +11,16 @@ cd vim
 
 make VIMRUNTIMEDIR=/usr/local/share/vim/vim81
 sudo make install
+
+cat <<EOF >> .config/xfce4/terminal/accels.scm
+(gtk_accel_path "<Actions>/terminal-window/next-tab" "<Primary>n")
+(gtk_accel_path "<Actions>/terminal-window/prev-tab" "<Primary>b")
+EOF
+
+# Add these lines to .config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml . Mine are in custom section? dunno quite how it needs be, but it works. Without comments obvs
+#      <property name="&lt;Super&gt;Right" type="string" value="tile_right_key"/>
+#      <property name="&lt;Super&gt;Down" type="string" value="tile_down_key"/>
+#      <property name="&lt;Primary&gt;&lt;Shift&gt;Up" type="string" value="maximize_window_key"/>
+#      <property name="&lt;Super&gt;Up" type="string" value="tile_up_key"/>
+#      <property name="&lt;Super&gt;Left" type="string" value="tile_left_key"/>
+
