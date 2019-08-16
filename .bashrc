@@ -21,6 +21,9 @@ shopt -s histappend
 HISTSIZE=5000
 HISTFILESIZE=10000
 
+# mark history entries with datestamps
+HISTTIMEFORMAT="%d/%m/%y %T "
+
 ####################################
 # Appearance/Functionality options #
 ####################################
@@ -36,6 +39,28 @@ shopt -s checkwinsize
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# ssh wrapper to rename the window to the hostname of the remote host.
+ssh() {
+    # Do nothing if we are not inside tmux or ssh is called without arguments
+    if [[ $# == 0 || -z $TMUX ]]; then
+        command ssh $@
+        return
+    fi
+    # The hostname is the last parameter.
+    local remote=${@: -1}
+    local old_name="$(tmux display-message -p '#W')"
+    local renamed=0
+    # Save the current name
+    if [[ $remote != -* ]]; then
+        renamed=1
+        tmux rename-window ssh:$remote
+    fi
+    command ssh $@
+    if [[ $renamed == 1 ]]; then
+        tmux rename-window "$old_name"
+    fi
+}
 
 #######################
 # Aliases/Completions #
@@ -97,7 +122,7 @@ export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
 
 # Defines a list of colours to cycle through. Yes. It is gross. Sorry
-COLOURWHEEL=( $( seq 27 -1 22 ) $( seq 28 33) $( seq 39 -1 34 ) $( seq 40 45 ) $( seq 51 -1 46 ) $( seq 82 87 ) $( seq 81 -1 76 ) $( seq 70 75 ) $( seq 69 -1 64 ) $( seq 58 63 ) $( seq 57 -1 52 ) $( seq 88 93 ) $( seq 99 -1 94 ) $( seq 100 105 ) $( seq 111 -1 106 ) $( seq 112 117 ) $( seq 123 -1 118 ) $( seq 154 159 ) $( seq  153 -1 148 ) $( seq 142 147 ) $( seq 141 -1 136 ) $( seq 130 135 ) $( seq 129 -1 124 ) $( seq 160 165 ) $( seq 171 -1 166 ) $( seq 172 177 ) $( seq 183 -1 178 ) $( seq 184 189 ) $( seq 195 -1 190 ) $( seq 226 231 ) $( seq 225 -1 220 ) $( seq 214 219 ) $( seq 213 -1 208 ) $( seq 202 207 ) $( seq 201 -1 196 ) $( seq 160 165 ) 129 93 99 105 111 117 123 51 45 39 33 ) 
+COLOURWHEEL=( $( seq 27 -1 22 ) $( seq 28 33) $( seq 39 -1 34 ) $( seq 40 45 ) $( seq 51 -1 46 ) $( seq 82 87 ) $( seq 81 -1 76 ) $( seq 70 75 ) $( seq 69 -1 64 ) $( seq 58 63 ) $( seq 57 -1 52 ) $( seq 88 93 ) $( seq 99 -1 94 ) $( seq 100 105 ) $( seq 111 -1 106 ) $( seq 112 117 ) $( seq 123 -1 118 ) $( seq 154 159 ) $( seq  153 -1 148 ) $( seq 142 147 ) $( seq 141 -1 136 ) $( seq 130 135 ) $( seq 129 -1 124 ) $( seq 160 165 ) $( seq 171 -1 166 ) $( seq 172 177 ) $( seq 183 -1 178 ) $( seq 184 189 ) $( seq 195 -1 190 ) $( seq 226 231 ) $( seq 225 -1 220 ) $( seq 214 219 ) $( seq 213 -1 208 ) $( seq 202 207 ) $( seq 201 -1 196 ) $( seq 160 165 ) 129 93 99 105 111 117 123 51 45 39 33 )
 WHEELLENGTH=${#COLOURWHEEL[@]}
 COLCOUNT=$(( $RANDOM ))
 
