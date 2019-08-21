@@ -21,7 +21,10 @@ function title()
 
 function ssh()
 {
-    ssh_with_title "$@"
+    if ! [[ $# == 0 || -z $TMUX ]]; then
+      title ${@: -1}
+    fi
+      /usr/bin/ssh $@
     # revert the window title after the ssh command
     title
 }
@@ -32,30 +35,6 @@ function su()
     # revert the window title after the su command
     title
 }
-
-# ssh wrapper to rename the tmux window to the hostname of the remote host.
-function ssh_with_title()
-{
-    # Do nothing if we are not inside tmux or ssh is called without arguments
-    if [[ $# == 0 || -z $TMUX ]]; then
-        command ssh $@
-        return
-    fi
-    # The hostname is the last parameter.
-    local remote=${@: -1}
-    local old_name="$(tmux display-message -p '#W')"
-    local renamed=0
-    # Save the current name
-    if [[ $remote != -* ]]; then
-        renamed=1
-        tmux rename-window ssh:$remote
-    fi
-    command ssh $@
-    if [[ $renamed == 1 ]]; then
-        tmux rename-window "$old_name"
-    fi
-}
-
 
 ##########################
 # USEFUL HISTORY OPTIONS #
