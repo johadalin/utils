@@ -7,41 +7,35 @@ case $- in
     *i*) ;;
       *) return;;
 esac
-##########################
-# USEFUL HISTORY OPTIONS #
-##########################
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
 
-# append to the history file, don't overwrite it
-shopt -s histappend
+function title()
+{
+    if [[ $# == 0 ]]; then
+      title_string="D.Va"
+    else
+      title_string="$*"
+    fi
+    # change the title of the current window or tab
+    echo -ne "\033]0;$title_string\007"
+}
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=5000
-HISTFILESIZE=10000
+function ssh()
+{
+    ssh_with_title "$@"
+    # revert the window title after the ssh command
+    title
+}
 
-# mark history entries with datestamps
-HISTTIMEFORMAT="%d/%m/%y %T "
+function su()
+{
+    /bin/su "$@"
+    # revert the window title after the su command
+    title
+}
 
-####################################
-# Appearance/Functionality options #
-####################################
-# Force xterm colour
-export TERM=xterm-256color
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
-
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# ssh wrapper to rename the window to the hostname of the remote host.
-ssh() {
+# ssh wrapper to rename the tmux window to the hostname of the remote host.
+function ssh_with_title()
+{
     # Do nothing if we are not inside tmux or ssh is called without arguments
     if [[ $# == 0 || -z $TMUX ]]; then
         command ssh $@
@@ -61,6 +55,39 @@ ssh() {
         tmux rename-window "$old_name"
     fi
 }
+
+
+##########################
+# USEFUL HISTORY OPTIONS #
+##########################
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=5000
+HISTFILESIZE=10000
+# mark history entries with datestamps
+HISTTIMEFORMAT="%d/%m/%y %T "
+
+####################################
+# Appearance/Functionality options #
+####################################
+# Force xterm colour
+export TERM=xterm-256color
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+#shopt -s globstar
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 #######################
 # Aliases/Completions #
@@ -109,14 +136,17 @@ fi
 ########################################
 # Path/PS1 settings! AKA: The good bit #
 ########################################
+title
 # Add RVM to PATH for scripting
 export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="$PATH:$HOME/go/bin"
 
 # You may need to install the git-completion sctipt, and potentially source them
 # if they end up installed in unusual locations (e.g. on Centos or others)
 # source /usr/share/doc/git/contrib/completion/git-completion.bash
 # source /usr/share/doc/git/contrib/completion/git-prompt.sh
 
+ source /usr/share/git-core/contrib/completion/git-prompt.sh
 # Set up git PS1 variables
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
@@ -136,6 +166,7 @@ function change_colors
     # PROMPT variable to be colour cycled into FINAL
     # Begin building up the Prompt with a timestamp
     PROMPT=`echo $(echo $TIMESTAMP)`
+    PROMPT+="-D.Va"
     PROMPTLENGTH=${#PROMPT}
     FINAL=''
 
