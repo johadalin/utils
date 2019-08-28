@@ -1,0 +1,6 @@
+cta - change to 'a'
+cfa - change find 'a'
+diw - del in word
+di] - del in []
+ctrl-a ctrl-x - find nextnumber and increment/decrement
+set rnu / set rnu! - enable or disable relative line numbering
