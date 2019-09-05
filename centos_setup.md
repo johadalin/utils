@@ -72,3 +72,24 @@ e.g.
 ---
 > Exec=/usr/bin/google-chrome-stable --password-store=basic %U --disable-async-dns
 ```
+and to change the 'Web Browser' applications link
+```
+cp /usr/share/applications/exo-web-browser.desktop .local/share/applications/
+vim ~/.local/share/applications/google-chrome.desktop
+```
+and change the `Exec` line to match one from the chrome file above. You can comment out the exo Exec line with a `#`
+
+N.B. Before the last change, this didn't  seem to work all the time, not sure why. Also, running chrome from the CLI i always forget it's `google-chrome` not just `chrome`, so:
+in Bashrc, add:
+```
+alias chrome='google-chrome --password-store=basic'
+```
+
+#### Disable screen saver/screen blanking
+Run
+```
+xset s 0 0
+xset s off
+xset s noblank
+xset -dpms
+```
