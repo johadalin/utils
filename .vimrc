@@ -233,6 +233,29 @@ let &showbreak='▸ '
 " See http://vim.wikia.com/wiki/Remove_unwanted_spaces
 autocmd BufWritePre * :%s/\s\+$//e
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" netrw file explorer settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Open a file explorer up. Can use :Explore :Sexplore or :Vexplore (normal, split, vsplit)
+" These options set up the config, as commented.
+" Set the list style to tree
+let g:netrw_liststyle = 3
+" Don't display the banner by default
+let g:netrw_banner = 0
+" Open selected files in a new vsplit
+let g:netrw_browse_split = 2
+" Set the netrw to take up a smaller percentage of screen real estate
+let g:netrw_winsize = 15
+" When opening a file with 'v', split it to the right, not left
+let g:netrw_altv = 1
+
+" DISABLED ATM as i don't like it, but might try again later
+" Auto start netrw in Vexplore mode on starting Vim
+" augroup ProjectDrawer
+"   autocmd!
+"   autocmd VimEnter * :Vexplore
+" augroup END
+
 " }}}
 
 " Fancypants column highlighting {{{
