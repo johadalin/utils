@@ -180,6 +180,9 @@ syntax on
 " display cursor position on ctrl-G
 set ruler
 
+" Display current line
+"set cursorline
+
 " auto-indent to same point as previous line
 " set autoindent
 
@@ -233,6 +236,9 @@ let &showbreak='▸ '
 " See http://vim.wikia.com/wiki/Remove_unwanted_spaces
 autocmd BufWritePre * :%s/\s\+$//e
 
+" Don't draw during macros, to improve performance
+set lazyredraw
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " netrw file explorer settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -247,7 +253,7 @@ let g:netrw_browse_split = 2
 " Set the netrw to take up a smaller percentage of screen real estate
 let g:netrw_winsize = 15
 " When opening a file with 'v', split it to the right, not left
-let g:netrw_altv = 1
+"let g:netrw_altv = 1
 
 " DISABLED ATM as i don't like it, but might try again later
 " Auto start netrw in Vexplore mode on starting Vim
