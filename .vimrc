@@ -180,9 +180,6 @@ syntax on
 " display cursor position on ctrl-G
 set ruler
 
-" Display current line
-"set cursorline
-
 " auto-indent to same point as previous line
 " set autoindent
 
@@ -228,9 +225,9 @@ set wildmode=longest,list,full
 set wildignore+=*.o,*.so,*.git/*,*.svn/*
 
 " Show tabs and wrapped lines.
-set list
-set listchars=tab:▸\ ,
-let &showbreak='▸ '
+"set list
+"set listchars=tab:▸\ ,
+"let &showbreak='▸ '
 
 " Strip trailing whitespace on save - for all file types.
 " See http://vim.wikia.com/wiki/Remove_unwanted_spaces
@@ -272,6 +269,13 @@ highlight LongLine ctermbg=88
 call matchadd('LongLine', '\%<101v.\%>81v', 100)
 highlight LongerLine ctermbg=89
 call matchadd('LongerLine', '\%>100v', 100)
+" }}}
+
+" Less fancy row highlighting {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Display current line
+set cursorline
+highlight CursorLine cterm=NONE ctermbg=235
 " }}}
 
 " Status Line {{{
