@@ -236,6 +236,23 @@ autocmd BufWritePre * :%s/\s\+$//e
 " Don't draw during macros, to improve performance
 set lazyredraw
 
+" Vim Tabs handling
+" New tab, New tab filename entry
+map <leader>tt :tabnew<cr>
+map <leader>tf :tabnew<Space>
+" First tab
+map <leader>t<up> :tabr<cr>
+map <leader>tk :tabr<cr>
+" Last tab
+map <leader>t<down> :tabl<cr>
+map <leader>tj :tabl<cr>
+" Move left one tab
+map <leader>t<left> :tabp<cr>
+map <leader>th :tabp<cr>
+" Move right one tab
+map <leader>t<right> :tabn<cr>
+map <leader>tl :tabn<cr>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " netrw file explorer settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
