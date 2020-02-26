@@ -38,6 +38,10 @@ function su()
     title
 }
 
+# Alias to force ssh to use password, for nodes that don't like too many ssh key
+# attempts before a password login
+alias password_ssh='ssh -o PreferredAuthentications=password '
+
 ##########################
 # USEFUL HISTORY OPTIONS #
 ##########################
@@ -89,6 +93,8 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+
+alias ctags='ctags -R'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
