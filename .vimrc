@@ -293,6 +293,8 @@ call matchadd('LongerLine', '\%>100v', 100)
 " Display current line
 set cursorline
 highlight CursorLine cterm=NONE ctermbg=235
+"ctermfg=white guibg=darkred guifg=white
+"ctermbg=235
 " }}}
 
 " Status Line {{{
