@@ -24,11 +24,13 @@ function ssh()
     if ! [[ $# == 0 || -z $TMUX ]]; then
       title ${@: -1}
     fi
-      /usr/bin/ssh $@
+    /usr/bin/ssh $@
     # revert the window title after the ssh command
     title
 }
 
+# Doesn't work when running `sudo su`, but running `title` after can reset the
+# terminal heading nicely.
 function su()
 {
     /bin/su "$@"
@@ -125,7 +127,7 @@ export PATH="$PATH:$HOME/go/bin"
 # source /usr/share/doc/git/contrib/completion/git-completion.bash
 # source /usr/share/doc/git/contrib/completion/git-prompt.sh
 
- source /usr/share/git-core/contrib/completion/git-prompt.sh
+source /usr/share/git-core/contrib/completion/git-prompt.sh
 # Set up git PS1 variables
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
