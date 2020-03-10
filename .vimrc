@@ -250,6 +250,8 @@ map <leader>th :tabp<cr>
 map <leader>t<right> :tabn<cr>
 map <leader>tl :tabn<cr>
 
+" Make leader = insert 80 = chars in a new line
+nmap <leader>= O<esc>80i=<esc><esc>j
 " }}}
 " netrw file explorer settings {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
