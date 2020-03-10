@@ -37,7 +37,7 @@ Plugin 'git@gitlab.datcon.co.uk:ajh/clearwater.vim.git'
 " To install the YouCompleteMe plugin, you need to build it locally after it's been pulled down.
 " First, run the Vundle :PluginInstall to let it clone the code, then run:
 "   cd ~/.vim/bundle/YouCompleteMe
-"   python3 install.py --clang-completer
+"   python3 install.py --clang-completer --java-completer --rust-completer
 if v:version >= 704  " YouCompleteMe requires a recent version of Vim.
   Plugin 'Valloric/YouCompleteMe'
 endif
