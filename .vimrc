@@ -15,6 +15,8 @@
 "   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " To install plugins, use Vim command `:PluginInstall`
 
+" Initial Vundle config {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible              " be iMproved, required
 filetype off                  " required
 " set the runtime path to include Vundle and initialize
@@ -22,7 +24,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-" Vundle Plugins
+" }}}
+" Vundle Plugins {{{
 
 " Gives rainbow bracket highlighting. Becuase what are spare CPU cycles for
 Plugin 'luochen1990/rainbow'
@@ -38,7 +41,7 @@ Plugin 'git@gitlab.datcon.co.uk:ajh/clearwater.vim.git'
 if v:version >= 704  " YouCompleteMe requires a recent version of Vim.
   Plugin 'Valloric/YouCompleteMe'
 endif
-
+" }}}
 " YouCompleteMe settings {{{
 
 " Don't clutter the UI with compilation warnings/errors.
@@ -60,8 +63,6 @@ nmap <leader>yg :YcmCompleter GoTo<cr>
 " Print the type of the variable under the cursor.
 nmap <leader>yt :YcmCompleter GetType<cr>
 " }}}
-
-
 " AJH PLUGINS {{{
 
 " Some configuration taken from https://github.com/AlexHockey/dotfiles/tree/master/dotfiles
@@ -96,9 +97,7 @@ nmap <leader>yt :YcmCompleter GetType<cr>
 "Plugin 'haishanh/night-owl.vim'
 "
 " }}}
-
-
-" All of your Plugins must be added before the following line
+" All of your Plugins must be added before this section {{{
 call vundle#end()            " required
 "filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -113,7 +112,7 @@ call vundle#end()            " required
 " see :h vundle for more details or wiki for FAQ
 " Vundle setup end
 " }}}
-
+" }}}
 " Find / Replace {{{
 
 " Highlight search matches.
@@ -139,8 +138,7 @@ hi Search ctermbg=DarkGrey
 nmap <C-C> <esc>:noh<cr>
 
 " }}}
-
-" Configuration for the Rainbow plugin {{{
+" Configuration for the Rainbow brackets plugin {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 let g:rainbow_conf = {
@@ -166,10 +164,9 @@ let g:rainbow_conf = {
   \ }
   \}
 " }}}
-
 " Usability {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Basic usability
+" Basic usability {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Make things usably visible
 set bg=dark
@@ -194,8 +191,8 @@ set backspace=indent,eol,start
 " Enable mouse functionality
 set mouse=a
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" More usability
+"}}}
+" More usability {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Filetype specific tab behaviour
 au FileType make setlocal noexpandtab
@@ -253,8 +250,8 @@ map <leader>th :tabp<cr>
 map <leader>t<right> :tabn<cr>
 map <leader>tl :tabn<cr>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" netrw file explorer settings
+" }}}
+" netrw file explorer settings {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Open a file explorer up. Can use :Explore :Sexplore or :Vexplore (normal, split, vsplit)
 " These options set up the config, as commented.
@@ -277,7 +274,7 @@ let g:netrw_winsize = 15
 " augroup END
 
 " }}}
-
+" }}}
 " Fancypants column highlighting {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 highlight ColorColumn ctermbg=235
@@ -287,7 +284,6 @@ call matchadd('LongLine', '\%<101v.\%>81v', 100)
 highlight LongerLine ctermbg=89
 call matchadd('LongerLine', '\%>100v', 100)
 " }}}
-
 " Less fancy row highlighting {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Display current line
@@ -295,15 +291,15 @@ set cursorline
 highlight CursorLine cterm=NONE ctermbg=235
 "ctermfg=white guibg=darkred guifg=white
 "ctermbg=235
-" }}}
 
+" }}}
 " Status Line {{{
 " Set the status line to be visible at all times.
 set laststatus=2
 
 " Use a nice color scheme for the status line. Dracula is more visualy intense
 " than onedark (the scheme used for the rest of the editor) so this makes the
-" statsu line stand out a bit more.
+" status line stand out a bit more.
 "let g:airline_theme = 'dracula'
 
 " Make airline use the powerline fonts, so we get a pretty looking line with
@@ -314,8 +310,8 @@ let g:airline_powerline_fonts = 1
 "" that is displayed at the top of the window, we can use it for something
 "" different. I find that displaying the current function is the most useful.
 "let g:airline_section_c = '%{GetFunctionUnderCursor()}'
-"" }}}
 
+"" }}}
 " Grep Settings {{{
 
 " Make grep ignore common false positives - binary files (-I) and tags.
@@ -324,7 +320,6 @@ set grepprg=grep\ -nI\ --exclude\ 'tags'\ $*\ /dev/null\ --exclude-dir=.svn\ --e
 " Grep for word under the cursor.
 nnoremap <Leader>gw :grep -rw <cword> .<CR>
 " }}}
-
 " Tagging {{{
 
 " Search for tag files in the current directory, and all parent directories.
@@ -354,5 +349,3 @@ EOF
 endfunction
 command! Tagme call RebuildTags(getcwd())
 " }}}
-
-
