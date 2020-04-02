@@ -38,9 +38,9 @@ function su()
     title
 }
 
-# Alias to force ssh to use password, for nodes that don't like too many ssh key
-# attempts before a password login
+# Alias to force ssh to use password, for nodes that stop after 3 ssh key tries
 alias password_ssh='ssh -o PreferredAuthentications=password '
+
 
 ##########################
 # USEFUL HISTORY OPTIONS #
@@ -53,8 +53,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=5000
-HISTFILESIZE=10000
+HISTSIZE=50000
+HISTFILESIZE=100000
 # mark history entries with datestamps
 HISTTIMEFORMAT="%d/%m/%y %T "
 
