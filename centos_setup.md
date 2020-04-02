@@ -1,6 +1,6 @@
 ### Make vim 8.1, so that YouCompleteMe works
 Install dependencies, and remove existing vim
-```sudo yum install cscope ncurses ncurses-devel ncurses-libs ncurses-base python-libs ruby-devel python36 python36-pip python36-devel perl perl-devel.x86_64 perl-ExtUtils-CBuilder.noarch perl-ExtUtils-Embed.noarch perl-ExtUtils-XSpp.noarch perl-ExtUtils-XSBuilder.noarch ctags lua lua-devel.x86_64 tcl-devel ctags git luajit
+```sudo yum install cscope ncurses ncurses-devel ncurses-libs ncurses-base python-libs ruby-devel python36 python36-pip python36-devel perl perl-devel.x86_64 perl-ExtUtils-CBuilder.noarch perl-ExtUtils-Embed.noarch perl-ExtUtils-XSpp.noarch perl-ExtUtils-XSBuilder.noarch ctags lua lua-devel.x86_64 tcl-devel ctags git luajit libX11-devel libXt-devel
 sudo ln -s /usr/bin/xsubpp /usr/share/perl5/ExtUtils/xsubpp
 sudo yum remove vim gvim vim-common.x86_64 vim-minimal.x86_64 vim-filesystem.x86_64
 ```
