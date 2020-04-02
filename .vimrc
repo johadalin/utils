@@ -237,6 +237,8 @@ set lazyredraw
 " New tab, New tab filename entry
 map <leader>tt :tabnew<cr>
 map <leader>tf :tabnew<Space>
+map <leader>tg <C-w>gf
+map <leader>ts :tabnew<Space>~/codedir/<cr>
 " First tab
 map <leader>t<up> :tabr<cr>
 map <leader>tk :tabr<cr>
@@ -246,12 +248,19 @@ map <leader>tj :tabl<cr>
 " Move left one tab
 map <leader>t<left> :tabp<cr>
 map <leader>th :tabp<cr>
+map <leader>tb :tabp<cr>
 " Move right one tab
 map <leader>t<right> :tabn<cr>
 map <leader>tl :tabn<cr>
+map <leader>tn :tabn<cr>
 
 " Make leader = insert 80 = chars in a new line
 nmap <leader>= O<esc>80i=<esc><esc>j
+
+" Clipboard copy/paste
+map <leader>y "*y
+map <leader>p "*p
+
 " }}}
 " netrw file explorer settings {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -294,6 +303,10 @@ highlight CursorLine cterm=NONE ctermbg=235
 "ctermfg=white guibg=darkred guifg=white
 "ctermbg=235
 
+" }}}
+" Disable highlights on leader keys {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <Leader>c ::call clearmatches()<CR>
 " }}}
 " Status Line {{{
 " Set the status line to be visible at all times.
