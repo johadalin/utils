@@ -29,6 +29,11 @@ function ssh()
     title
 }
 
+function vimlocate()
+{
+  filename=`locate $* | head -n 1`
+  vim $filename
+}
 # Doesn't work when running `sudo su`, but running `title` after can reset the
 # terminal heading nicely.
 function su()
