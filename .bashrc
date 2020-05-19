@@ -34,6 +34,12 @@ function vimlocate()
   filename=`locate $* | head -n 1`
   vim $filename
 }
+
+function cdlocate()
+{
+  dirname=`locate $* | head -n 1 | rev | cut -d '/' -f2- | rev`
+  cd $dirname
+}
 # Doesn't work when running `sudo su`, but running `title` after can reset the
 # terminal heading nicely.
 function su()
