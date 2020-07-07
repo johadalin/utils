@@ -101,7 +101,7 @@ nmap <leader>yt :YcmCompleter GetType<cr>
 call vundle#end()            " required
 "filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
-"filetype plugin on
+filetype plugin on
 "
 " Brief help
 " :PluginList       - lists configured plugins
@@ -177,6 +177,8 @@ syntax on
 " display cursor position on ctrl-G
 set ruler
 
+" disable terminal title setting, to avoid weird "Terminal Terminal..." issue
+set notitle
 " auto-indent to same point as previous line
 " set autoindent
 
@@ -260,6 +262,7 @@ nmap <leader>= O<esc>80i=<esc><esc>j
 " Clipboard copy/paste
 map <leader>y "*y
 map <leader>p "*p
+map <leader>P "*P
 
 " }}}
 " netrw file explorer settings {{{
@@ -290,10 +293,10 @@ let g:netrw_winsize = 15
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 highlight ColorColumn ctermbg=235
 let &colorcolumn="80,100"
-highlight LongLine ctermbg=88
-call matchadd('LongLine', '\%<101v.\%>81v', 100)
-highlight LongerLine ctermbg=89
-call matchadd('LongerLine', '\%>100v', 100)
+" highlight LongLine ctermbg=88
+" call matchadd('LongLine', '\%<101v.\%>81v', 100)
+" highlight LongerLine ctermbg=89
+" call matchadd('LongerLine', '\%>100v', 100)
 " }}}
 " Less fancy row highlighting {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
