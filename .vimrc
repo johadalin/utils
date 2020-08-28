@@ -307,6 +307,11 @@ highlight CursorLine cterm=NONE ctermbg=235
 "ctermbg=235
 
 " }}}
+" Spell highlighting {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"highlight clear SpellBad
+highlight SpellBad ctermfg=160 ctermbg=253 guifg=#ff0000 guibg=#ffff00
+" }}}
 " Disable highlights on leader keys {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <Leader>c ::call clearmatches()<CR>
