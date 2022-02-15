@@ -29,6 +29,12 @@ function ssh()
     title
 }
 
+function vimfind()
+{
+  filename=`find $*`
+  vim $filename
+}
+
 function vimlocate()
 {
   filename=`locate $* | head -n 1`
@@ -66,16 +72,16 @@ alias password_ssh='ssh -o PreferredAuthentications=password '
 ##########################
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+export HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=50000
-HISTFILESIZE=100000
+export HISTSIZE=50000
+export HISTFILESIZE=100000
 # mark history entries with datestamps
-HISTTIMEFORMAT="%d/%m/%y %T "
+export HISTTIMEFORMAT="%d/%m/%y %T "
 
 ####################################
 # Appearance/Functionality options #
