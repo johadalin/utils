@@ -1,0 +1,58 @@
+# Git rerere: reuse recorded resolution
+# A git tool to cache merge conflict resolutions, allowing for easy automatic resolution later.
+
+# Prior to running you will need to enable rerere:
+#   git config --global rerere.enabled true
+#
+# You may also wish to test the difference between default diff style and diff3
+#   git config --global merge.conflictstyle=diff3
+# See git docs for more detail
+
+
+# Run all commands in the demo repo
+# It has been set up with some necessary branches:
+#   Master: a ruby file that prints 'hello world'
+#   change_hello: updates the file to change 'hello' to 'hola'
+#   change_world: updates the file to change 'world' to 'mundo'
+#   merge_for_rerere_from_change_hello: a direct copy of change_hello that we will use for our initial merge to demo rerere capability
+
+# Show off the branches, and the changes they have. This should match the assumptions above.
+git branch
+git diff master..change_world
+git diff master..change_hello
+git diff change_hello..merge_for_rerere_from_change_hello
+
+# Show that currently the rr-cache is empty. If it is not present, you likely haven't enabled rerere. See top of file for config option
+ls -la .git/rr-cache/
+
+# Run the conflicting merge on the test branch
+git checkout merge_for_rerere_from_change_hello
+git merge change_world
+git status
+git diff
+
+# We have a conflict. Fix it and continue to add and commit the file, resolving the merge
+# Prior to fixing at this point you can see the difference diff3 provides, showing shared common
+# ancestor code 'hello world', letting us see that each branch attempted to change the language to spanish, but didn't complete the work
+
+
+# We now have the conflict resolution information in the rr-cache
+ls -la .git/rr-cache/
+cat .git/rr-cache/*
+
+# Then, to see how rerere works, we can go to our 'real' branch, and repeat
+git checkout change_hello
+git merge change_world
+git status
+git diff
+
+# You should see that the conflicting change has been automatically resolved in the same way as before,
+# leaving you with 'hola mundo' added.
+# You can add and commit the change without any user file editing.
+
+# Other useful notes:
+# If desired, you can force the conflict to be present as it would be without rerere:
+git checkout --conflict=merge rerere.rb
+
+# and then re-fix with rerere simply by running:
+git rerere

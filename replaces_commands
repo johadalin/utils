@@ -1,0 +1,20 @@
+# Run all commands in max-pjsip
+# First, show git logs end at commit 'tag alpha2'
+git log
+
+# Add and fetch the upstream remote
+git remote add upstream ../upstream-pjsip/
+git remote -v
+git fetch --tags upstream
+
+# Attempt a merge, to show that it fails
+git merge upstream/branch_on_tag_2.10
+
+# Replace our first commit with the equivalient from the upstream with actual history
+git replace --graft 0c5ce58c747ea33bbbe05927391b1bc88047da07 e1c94ca738bb4cb8455504bcc6c85b27f17e6889
+
+# show git logs, and .git/refs/replace
+# We should now go far beyond the 'alpha2' commit
+
+# We can now attempt a merge. This fails with a lot of conflicts, but we can at least attempt it
+git merge upstream/branch_on_tag_2.10
